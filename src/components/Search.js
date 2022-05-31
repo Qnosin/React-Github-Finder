@@ -3,8 +3,9 @@ import {useContext} from 'react';
 import { SearchContext } from '../helper/SearchContext';
 import { UndrawSearch } from 'react-undraw-illustrations';
 function Search() {
-    const {inputValue, SetinputValue,loadingValues,setloadingValues} = useContext(SearchContext);
+    const {inputValue, SetinputValue,setloadingValues} = useContext(SearchContext);
     const handleChange = (e) =>{
+        console.clear();
         e.preventDefault();
         SetinputValue(e.target.value);
         setloadingValues(true);

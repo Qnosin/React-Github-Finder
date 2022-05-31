@@ -1,11 +1,13 @@
 import React from 'react'
+import {useState} from 'react';
 import { useContext } from 'react';
 import { dataContext } from '../helper/SearchContext';
 import Footercomp from './Footercomp';
 
 function Main() {
-    const {login,loadingValues,avatar,location,bio,url,name,setName,setUrl,setavatar,Setlocation,setBio,setLogin,setloadingValues} = useContext(dataContext);
-    let avatarDisplay =  <img src={avatar} alt='avatar picture'></img>
+    const {login,loadingValues,avatar,location,bio,url,name} = useContext(dataContext);
+    const [isLoading,setIsLoading] = useState(true);
+    let avatarDisplay =  <img onLoad={()=> setIsLoading(false)} src={avatar} alt='avatar'></img>
     const clickHandler = (url) =>{
         window.open(url,'_blank');
     }
@@ -18,11 +20,20 @@ function Main() {
             <>
             <main>
               <div className='avatar'>
-                         <div className='avatar__box' onClick={ ()=> clickHandler(url)}>{avatarDisplay}</div> 
-                          <p>{login}</p>
-                          <p>{name}</p>
-                          <p>{bio}</p>
-                          <p>{location}</p>
+                        {isLoading && <div>Loading</div>}
+                        {bio === '' && name === '' && location === '' ? 
+                        <div className='Error'>User Not Found :C</div> 
+                        :
+                        <>
+                        <div className='avatar__box' onClick={ ()=> clickHandler(url)}>{avatarDisplay}</div>
+                         <div className='avatar__box__description'>
+                            <p>Login: {login}</p>
+                            <p>Github Name: {name}</p>
+                            <p>Bio: {bio}</p>
+                            <p>Location: {location}</p>
+                          </div> 
+                          </>
+                        }
                       </div>
             </main>
             <Footercomp></Footercomp>

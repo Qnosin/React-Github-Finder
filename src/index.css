@@ -37,6 +37,9 @@ h3{
 .Search__component h1{
   text-align: center;
 }
+.Search__component svg{
+  max-width: 300px;
+}
 
 img{
   max-width: 60%;
@@ -65,6 +68,11 @@ main{
 }
 .avatar{
   animation: fadein  3s;
+}
+
+.avatar__box__description p{
+    border-bottom: 1px solid rgba(113, 158, 206, 1);
+    padding-bottom: .8rem;
 }
 
 .avatar__box img:hover{
@@ -103,5 +111,22 @@ footer{
   .avatar__box{
     width: 50%;
   }
-  
+}
+
+@media screen and (min-width:800px){
+  .avatar{
+    flex-direction: row;
+    max-width: 800px;
+  }
+  .avatar__box img{
+    max-width: 300px;
+  }
+  main{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  .avatar__box__description{
+    margin-left: 5rem;
+  }
 }

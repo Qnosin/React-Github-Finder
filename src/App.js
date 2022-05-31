@@ -5,7 +5,6 @@ import { useState,useEffect } from 'react';
 import { SearchContext } from './helper/SearchContext';
 import { dataContext } from './helper/SearchContext';
 import Main from './components/Main';
-import Footercomp from './components/Footercomp';
 
 //
 function App() {
@@ -24,29 +23,38 @@ function App() {
 
   //async function to get the data
   async function getData(value){
-    const fetchData = fetch(`https://api.github.com/users/${value}`, {
+      const fetchData = fetch(`https://api.github.com/users/${value}`, {
       headers: {
         Authorization: "Basic UW5vc2luOmdocF9jMzlTSk9KM09yajcxVFVXM2MwMUtlWkkwR0s4ZWkwZm45NTA="
       }
     })
-    await fetchData
-    const data = (await fetchData).json();
-    await data
-    return data
+      await fetchData
+      const data = (await fetchData).json();
+      await data
+      return data
   }
 
   //Waitng for changing the data
   useEffect(()=>{
     getData(inputValue).then((data)=>{
-      setTimeout(()=>{
-        console.log(data);
-        setName(data.name);
-        setUrl(data.html_url);
-        setavatar(data.avatar_url)
-        Setlocation(data.location)
-        setLogin(data.login)
-        setBio(data.bio)
-      },200)
+      if(data.message === 'Not Found'){
+        setUrl("");
+        setavatar("")
+        Setlocation("")
+        setLogin("")
+        setBio("")
+        setName("");
+      }else{
+        setTimeout(()=>{
+          setName(data.name);
+          setUrl(data.html_url);
+          setavatar(data.avatar_url)
+          Setlocation(data.location)
+          setLogin(data.login)
+          setBio(data.bio)
+        },200)
+      }
+      
     }
     )
   },[inputValue])
