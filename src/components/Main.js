@@ -2,6 +2,7 @@ import React from 'react'
 import {useState} from 'react';
 import { useContext } from 'react';
 import { dataContext } from '../helper/SearchContext';
+import {motion} from 'framer-motion';
 import Footercomp from './Footercomp';
 
 function Main() {
@@ -22,10 +23,10 @@ function Main() {
               <div className='avatar'>
                         {isLoading && <div>Loading</div>}
                         {bio === '' && name === '' && location === '' ? 
-                        <div className='Error'>User Not Found :C</div> 
+                        <motion.div animate={{scale:1}} initial={{scale:0}} transition={{type:'tween'}} className='Error'>User Not Found :C</motion.div> 
                         :
                         <>
-                        <div className='avatar__box' onClick={ ()=> clickHandler(url)}>{avatarDisplay}</div>
+                        <motion.div animate={{scale:1}} initial={{scale:0}} transition={{type:'tween'}} className='avatar__box' onClick={ ()=> clickHandler(url)}>{avatarDisplay}</motion.div>
                          <div className='avatar__box__description'>
                             <p>Login: {login}</p>
                             <p>Github Name: {name}</p>
